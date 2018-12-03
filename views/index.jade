@@ -1,0 +1,105 @@
+extends layout
+
+block content
+  #legend
+    .my-legend
+      .legend-title: Explanation  Points of interests
+      .legend-scale
+        ul.legend-labels
+          li
+            span(style={background: '#00FF7F'})
+            PoI Museum
+          li
+            span(style={background: '#005129'})
+            PoI Tower
+          li
+            span(style={background: '#e3ff01'})
+            PoI Sports centre
+          li
+            span(style={background: '#9ACD32'})
+            PoI Castle
+          li
+            span(style={background: '#156bcc'})
+            PoI Restaurant
+          li
+            span(style={background: '#9010ff'})
+            PoI Embassy
+          li
+            span(style={background: '#ff9410'})
+            PoI Bank
+          li
+            span(style={background: '#ff1010'})
+            PoI Hotel
+          li
+            span(style={background: '#3e2d31'})
+            PoI Shop
+          li
+            span(style={background: '#635400'})
+            PoI Religion building
+          li
+            span(style={background: '#6d6d66'})
+            PoI Other
+
+  #map
+    script.
+      L.mapbox.accessToken = 'pk.eyJ1IjoiZXZhaG5pOCIsImEiOiJjaWZ6OHgwbG4wMmc1dG1tN3h4YnpxajlqIn0.ay9PDyLuYmcX1vIUE8QEwg';
+      var map = L.mapbox.map('map').setView([48.653,19.891], 8);
+      L.mapbox.styleLayer('mapbox://styles/cegy/cjovph7ql1h0h2rs0tszmzmj4').addTo(map);
+      map.addControl(L.mapbox.geocoderControl('mapbox.places', {
+        autocomplete: true
+      }));
+      map.legendControl.addLegend(document.getElementById('legend').innerHTML);
+
+  #menu
+    p#heading Slovak Castles
+    button(type='button', onclick='vratData("/castles", true)') All Castles (Markers only)
+    button(type='button', onclick='vratData("/castles-poly", true)') Color castles based on their area
+    fieldset
+      legend Select castles near cities in km
+      select#closeTowns.inline
+      .div  
+        input#numberKms(type='number', name='limit', min='0', max='300', value='1')
+        button.inline(type='button', onclick='closeTowns()') Show
+    fieldset
+      legend Selects castles and parking lots within given meters
+      .div  
+        input#closeParking(type='number', name='limit', min='0', max='3000', value='5')
+        button.inline(type='button', onclick='closeParking()') Show
+    fieldset
+      legend Show objects of interests from castle on click in meters
+      .div  
+        input#closeInterests(type='number', name='limit', min='0', max='3000', value='5')
+    .my-legend-vertical
+      .legend-title-vertical: Explanation  Castles by area size
+      .legend-scale-vertical
+        ul.legend-labels-vertical
+          li
+            span(style={background: '#009900'})
+            PoI 0-50
+          li
+            span(style={background: '#66ff33'})
+            PoI 50-100
+          li
+            span(style={background: '#ccff66'})
+            PoI 100-150
+          li
+            span(style={background: '#ccff33'})
+            PoI 150-300
+          li
+            span(style={background: '#ffff00'})
+            PoI 300-500
+          li
+            span(style={background: '#cccc00'})
+            PoI 500-1000
+          li
+            span(style={background: '#cc9900'})
+            PoI 1000-1500
+          li
+            span(style={background: '#996633'})
+            PoI 1500-2000
+          li
+            span(style={background: '#663300'})
+            PoI 2000+
+
+
+  #target

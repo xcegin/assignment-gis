@@ -18,10 +18,14 @@ Build a map-based application, which lets the user see geo-based data on a map a
 
 ## My project
 
-Fill in (either in English, or in Slovak):
+Fork this repository and fill in (either in English, or in Slovak):
 
-**Application description**: `<fill in>`
+**Application description**: `Application displays castles in slovakia, shows them as points, 
+provides different coloring based on their area size, on point click shows interests near the castle
+on keystroke shows the pedestrian road network within 500 metres, shows parking lots near castles with castles,
+shows castles within the proximity of a big city.`
 
-**Data source**: `<fill in>`
+**Data source**: `openstreetmap map of slovakia`
 
-**Technologies used**: `<fill in>`
+**Technologies used**: `nodejs, express, postgresql, postgis`
+#

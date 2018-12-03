@@ -1,0 +1,113 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.js')
+    script(src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v1.0.0/leaflet.markercluster.js')
+    link(href='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.css', rel='stylesheet')
+    link(href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v1.0.0/MarkerCluster.css', rel='stylesheet')
+    link(href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v1.0.0/MarkerCluster.Default.css', rel='stylesheet')
+    style.
+      body { margin:0; padding:0; }
+      #map { position:absolute; top:0; bottom:0; left:0; width:70%;}
+      #menu { position:absolute; top:0; bottom:0; right:0; width:30%}
+    script(type='text/javascript').
+      vratData = function (url, clean) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (xhttp.readyState == 4 && xhttp.status == 200) {
+            var jsonData = JSON.parse(xhttp.responseText);
+            console.dir(jsonData);
+
+            if(typeof detailLayer !== 'undefined') map.removeLayer(detailLayer);
+            if(typeof myLayer !== 'undefined' && clean) map.removeLayer(myLayer);
+            if(typeof clusterGroup !== 'undefined' && clean) map.removeLayer(clusterGroup);
+            if (!clean) {detailLayer = L.mapbox.featureLayer().setGeoJSON(jsonData);}
+            else {myLayer = L.mapbox.featureLayer().setGeoJSON(jsonData);
+            clusterGroup = new L.MarkerClusterGroup();}
+            if (clean) {
+                myLayer.eachLayer(function(layer) {
+                  clusterGroup.addLayer(layer);
+                });
+                clusterGroup.on('keypress', function (a) {
+                  console.log(a.layer.feature);
+                  if (a.layer.feature.geometry.type == "Point"){ 
+                    closeRoadNetwork(a.layer.feature.osm_id);  
+                  }
+                });
+                clusterGroup.on('click', function (a) {
+                  console.log(a.layer.feature);
+                  if (a.layer.feature.geometry.type == "Point"){ 
+                    closeInterests(a.layer.feature.osm_id);  
+                  }
+                });
+
+                map.addLayer(clusterGroup);
+              } else {
+              map.addLayer(detailLayer);
+              }
+          }
+        };
+        xhttp.open("GET", url, true);
+        xhttp.send();
+      };
+      
+      selectData = function () {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (xhttp.readyState == 4 && xhttp.status == 200) {
+            var jsonData = JSON.parse(xhttp.responseText);
+            console.dir(jsonData);
+            var sel = document.getElementById('closeTowns');
+            for (row in jsonData){
+                console.log(jsonData[row]);
+                var opt = document.createElement('option');
+                opt.value = jsonData[row].osm_id;
+                opt.innerHTML = jsonData[row].name;
+                sel.appendChild(opt);
+            }
+          }
+        };
+        xhttp.open("GET", '/selectBigCities', true);
+        xhttp.send();
+      };
+
+      closeParking = function() {
+          var num = document.getElementById('closeParking').value;
+          
+          console.log(num);
+          
+          vratData('/closeParking?num='+num, true);
+      }
+
+      closeInterests = function(sel) {
+          var num = document.getElementById('closeInterests').value;
+          
+          console.log(sel);
+          console.log(num);
+          
+          vratData('/closeInterests?id='+sel+'&num='+num, false);
+      }
+
+      
+      closeTowns = function() {
+          var sel = document.getElementById('closeTowns').value;
+          var num = document.getElementById('numberKms').value;
+          
+          console.log(sel);
+          console.log(num);
+          
+          vratData('/closeTowns?id='+sel+'&num='+num, true);
+      }
+
+      closeRoadNetwork = function(sel) {          
+          console.log(sel);
+          
+          vratData('/roads?id='+sel, false);
+      }
+      
+      selectData();
+
+  body
+    block content

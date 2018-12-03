@@ -1,0 +1,147 @@
+body {
+  padding: 50px;
+  font: 14px Impact, Charcoal, sans-serif;
+}
+
+
+a {
+  color: greenyellow;
+}
+
+#heading {
+  color: greenyellow;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 26px;
+}
+
+button, select, input {
+  color: greenyellow;
+  background-color: #222222;
+  border: 1px solid greenyellow;
+  font: 20px Impact, Charcoal, sans-serif;
+  width: 90%;
+  position: relative;
+  vertical-align: center;
+  padding: 5px;
+  margin: 5%;
+  margin-top:2%;
+  }
+  
+button:hover {
+  background-color: greenyellow;
+  border: 1px solid #222222;
+  color: #222222;
+}
+
+fieldset {
+  color: greenyellow;
+  border: 1px solid greenyellow;
+  margin: 5%;
+}
+
+select, input {
+  font-family: sans-serif;
+  font-size: 15px;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+input {
+  width: 40%;
+  float: left;
+  display: inline-block;
+  margin-right: 1%;
+}
+
+.inline {
+  font-size: 15px;
+  display: inline-block;
+  float: right;
+  width: 40%;
+  margin-left: 1%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+
+}
+
+#menu {
+  background-color: #222222;
+  color: white;
+}
+
+.my-legend .legend-title {
+  text-align: left;
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 90%;
+  }
+.my-legend .legend-scale ul {
+  margin: 0;
+  margin-bottom: 5px;
+  padding: 0;
+  float: left;
+  list-style: none;
+  }
+.my-legend .legend-scale ul li {
+  font-size: 80%;
+  list-style: none;
+  margin-left: 0;
+  line-height: 18px;
+  margin-bottom: 2px;
+  }
+.my-legend ul.legend-labels li span {
+  display: block;
+  float: left;
+  height: 16px;
+  width: 30px;
+  margin-right: 5px;
+  margin-left: 0;
+  border: 1px solid #999;
+  }
+.my-legend .legend-source {
+  font-size: 70%;
+  color: #999;
+  clear: both;
+  }
+.my-legend a {
+  color: #777;
+  }
+
+.my-legend-vertical .legend-title-vertical {
+  text-align: center;
+  margin-bottom: 8px;
+  font-size: 90%;
+  color: greenyellow;
+  }
+.my-legend-vertical .legend-scale-vertical ul {
+  margin-left: 50px;
+  padding: 0;
+  float: left;
+  list-style: none;
+  }
+.my-legend-vertical .legend-scale-vertical ul li {
+  display: block;
+  float: left;
+  width: 50px;
+  margin-bottom: 6px;
+  text-align: center;
+  font-size: 80%;
+  list-style: none;
+  color: greenyellow;
+  }
+.my-legend-vertical ul.legend-labels-vertical li span {
+  display: block;
+  float: left;
+  height: 15px;
+  width: 50px;
+  color: greenyellow;
+  }
+.my-legend-vertical .legend-source-vertical {
+  font-size: 70%;
+  color: #999;
+  clear: both;
+  }
+.my-legend-vertical a {
+  color: #777;
+  }
